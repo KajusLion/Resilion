@@ -1,4 +1,4 @@
-package me.kajuslion.resilion.Mixin;
+package me.kajuslion.resilion.mixin;
 
 
 import me.kajuslion.resilion.item.ModItems;
