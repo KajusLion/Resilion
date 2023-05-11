@@ -19,6 +19,10 @@
       "me.kajuslion.resilion.Resilion"
     ]
   },
+
+  "mixins": [
+    "Resilion.mixins.json"
+    ],
   "depends": {
     "fabricloader": ">=0.14.19",
     "fabric": "*",

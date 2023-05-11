@@ -7,7 +7,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 
-public class ModItemGroups {
+public class ModItemGroup {
     public static final ItemGroup RESILION = FabricItemGroupBuilder.build(new Identifier(Resilion.MOD_ID, "resilion"),
             () -> new ItemStack(ModItems.KAJUS_TOTEM));
 }

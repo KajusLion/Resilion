@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import me.kajuslion.resilion.item.ModItems;
+import me.kajuslion.resilion.block.ModBlocks;
 
 
 
@@ -17,6 +18,7 @@ public class Resilion implements ModInitializer {
     public void onInitialize() {
         LOGGER.info("Resilion has loaded!");
         ModItems.registerModItems();
+        ModBlocks.registerModBlocks();
     }
 
 }

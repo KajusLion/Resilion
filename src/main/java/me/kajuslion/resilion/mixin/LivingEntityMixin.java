@@ -2,7 +2,6 @@ package me.kajuslion.resilion.mixin;
 
 
 import me.kajuslion.resilion.item.ModItems;
-import me.kajuslion.resilion.Resilion;
 
 
 
@@ -19,19 +18,15 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.Random;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
-    private DamageSource onApplyDamage_damageSource;
 
     @Inject(method = "tryUseTotem", at = @At("RETURN"), cancellable = true)
     private void onTryUseTotem(DamageSource source, CallbackInfoReturnable<Boolean> info) {
         LivingEntity entity = (LivingEntity)(Object)this;
 
 
-        Resilion.LOGGER.info("Start (Chapter 1)");
-        //LivingEntity entity = (LivingEntity)(Object)this;
 
         if (info.getReturnValue()) {
             return;
@@ -41,12 +36,8 @@ public abstract class LivingEntityMixin {
         Hand[] handValues = Hand.values();
 
         for (Hand hand : handValues) {
-            Resilion.LOGGER.info("for 1");
             ItemStack stackInHand = entity.getStackInHand(hand);
-            final Random r = new Random();
-            Resilion.LOGGER.info("for 2");
             if (stackInHand.isOf(ModItems.KAJUS_TOTEM.asItem())){
-                Resilion.LOGGER.info("IT IS!");
             //if (itemStack(ModItems.KAJUS_TOTEM.asItem())) {
                 itemStack = stackInHand.copy();
                 stackInHand.decrement(1);
@@ -55,7 +46,6 @@ public abstract class LivingEntityMixin {
 
         }
 
-        Resilion.LOGGER.info("Chapter 2");
 
         if (itemStack == null) {
             return;

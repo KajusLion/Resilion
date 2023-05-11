@@ -11,10 +11,7 @@ import net.minecraft.util.registry.Registry;
 public class ModItems {
 
     public static final Item KAJUS_TOTEM = registerItem("kajus_totem",
-            new Item(new FabricItemSettings().maxCount(1).group(ModItemGroups.RESILION).rarity(Rarity.RARE)));
-
-    public static final Item KAJUS_CHEST = registerItem("kajus_chest",
-            new Item(new FabricItemSettings().maxCount(8).group(ModItemGroups.RESILION).rarity(Rarity.RARE)));
+            new Item(new FabricItemSettings().maxCount(1).group(ModItemGroup.RESILION).rarity(Rarity.RARE)));
 
 
 
