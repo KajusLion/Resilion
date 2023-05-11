@@ -1,4 +1,5 @@
-# ![Resilion](.github/assets/icon.jpg) Resilion
+![Resilion](.github/assets/icon.jpg) 
+# Resilion
 Resilion is a Fabric mod made by KajusLion.
 
 You can support me here:
