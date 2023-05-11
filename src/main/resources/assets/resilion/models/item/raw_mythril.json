@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "Resilion:item/unknown"
+    "layer0": "resilion:item/unknown"
   }
 }
