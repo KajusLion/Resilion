@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "resilion",
+  "version": "${version}",
+  "name": "Resilion",
+  "description": "",
+  "authors": [],
+  "contact": {
+    "repo": "https://github.com/KajusLion/Resilion"
+  },
+  "license": "All-Rights-Reserved",
+  "icon": "assets/Resilion/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "me.kajuslion.resilion.client.ResilionClient"
+    ],
+    "main": [
+      "me.kajuslion.resilion.Resilion"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.14.19",
+    "fabric": "*",
+    "minecraft": "1.19.2"
+  }
+}
