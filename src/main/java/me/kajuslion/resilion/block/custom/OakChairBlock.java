@@ -35,92 +35,28 @@ public class OakChairBlock extends Block {
     }
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (world.isClient) {
-            Resilion.LOGGER.info("1");
-            return ActionResult.SUCCESS;
-        } else {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            Resilion.LOGGER.info("else");
-            if (blockEntity instanceof BrewingStandBlockEntity) {
-                Resilion.LOGGER.info("BS");
-            }
+        Resilion.LOGGER.info("1");
+        return ActionResult.SUCCESS;
 
-            Resilion.LOGGER.info("return");
-            return ActionResult.CONSUME;
-        }
+
     }
-    private static final VoxelShape SHAPE_N = Stream.of(
-            Block.createCuboidShape(-0.25, 9, -0.25, 16.25, 11, 16.25),
-            Block.createCuboidShape(0, 11, 14, 16, 26, 16),
-            Block.createCuboidShape(1, 11, 1, 15, 11.5, 14),
-            Block.createCuboidShape(0, 0, 0, 2, 9, 2),
-            Block.createCuboidShape(0.25, 8, 2, 1.75, 10, 14),
-            Block.createCuboidShape(0, 0, 14, 2, 9, 16),
-            Block.createCuboidShape(2, 8, 14.25, 14, 10, 15.75),
-            Block.createCuboidShape(14, 0, 14, 16, 9, 16),
-            Block.createCuboidShape(14.25, 8, 2, 15.75, 10, 14),
-            Block.createCuboidShape(14, 0, 0, 16, 9, 2),
-            Block.createCuboidShape(2, 8, 0.25, 14, 10, 1.75)
+    private static final VoxelShape SHAPE = Stream.of(
+            Block.createCuboidShape(2, 6, 0.25, 14, 8, 1.75),
+            Block.createCuboidShape(0.25, 6, 2, 1.75, 8, 14),
+            Block.createCuboidShape(2, 6, 14.25, 14, 8, 15.75),
+            Block.createCuboidShape(14.25, 6, 2, 15.75, 8, 14),
+            Block.createCuboidShape(14, 0, 14, 16, 7, 16),
+            Block.createCuboidShape(14, 0, 0, 16, 7, 2),
+            Block.createCuboidShape(0, 0, 0, 2, 7, 2),
+            Block.createCuboidShape(0, 0, 14, 2, 7, 16),
+            Block.createCuboidShape(-0.25, 7, -0.25, 16.25, 9, 16.25),
+            Block.createCuboidShape(1, 9, 1, 15, 9.5, 15)
     ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
 
-
-    private static final VoxelShape SHAPE_W = Stream.of(
-            Block.createCuboidShape(-0.25, 9, -0.25, 16.25, 11, 16.25),
-            Block.createCuboidShape(14, 11, 0, 16, 26, 16),
-            Block.createCuboidShape(1, 11, 1, 14, 11.5, 15),
-            Block.createCuboidShape(0, 0, 14, 2, 9, 16),
-            Block.createCuboidShape(2, 8, 14.25, 14, 10, 15.75),
-            Block.createCuboidShape(14, 0, 14, 16, 9, 16),
-            Block.createCuboidShape(14.25, 8, 2, 15.75, 10, 14),
-            Block.createCuboidShape(14, 0, 0, 16, 9, 2),
-            Block.createCuboidShape(2, 8, 0.25, 14, 10, 1.75),
-            Block.createCuboidShape(0, 0, 0, 2, 9, 2),
-            Block.createCuboidShape(0.25, 8, 2, 1.75, 10, 14)
-    ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
-
-    private static final VoxelShape SHAPE_S = Stream.of(
-            Block.createCuboidShape(-0.25, 9, -0.25, 16.25, 11, 16.25),
-            Block.createCuboidShape(0, 11, 0, 16, 26, 2),
-            Block.createCuboidShape(1, 11, 2, 15, 11.5, 15),
-            Block.createCuboidShape(14, 0, 14, 16, 9, 16),
-            Block.createCuboidShape(14.25, 8, 2, 15.75, 10, 14),
-            Block.createCuboidShape(14, 0, 0, 16, 9, 2),
-            Block.createCuboidShape(2, 8, 0.25, 14, 10, 1.75),
-            Block.createCuboidShape(0, 0, 0, 2, 9, 2),
-            Block.createCuboidShape(0.25, 8, 2, 1.75, 10, 14),
-            Block.createCuboidShape(0, 0, 14, 2, 9, 16),
-            Block.createCuboidShape(2, 8, 14.25, 14, 10, 15.75)
-    ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
-
-
-    private static final VoxelShape SHAPE_E = Stream.of(
-            Block.createCuboidShape(-0.25, 9, -0.25, 16.25, 11, 16.25),
-            Block.createCuboidShape(0, 11, 0, 2, 26, 16),
-            Block.createCuboidShape(2, 11, 1, 15, 11.5, 15),
-            Block.createCuboidShape(14, 0, 0, 16, 9, 2),
-            Block.createCuboidShape(2, 8, 0.25, 14, 10, 1.75),
-            Block.createCuboidShape(0, 0, 0, 2, 9, 2),
-            Block.createCuboidShape(0.25, 8, 2, 1.75, 10, 14),
-            Block.createCuboidShape(0, 0, 14, 2, 9, 16),
-            Block.createCuboidShape(2, 8, 14.25, 14, 10, 15.75),
-            Block.createCuboidShape(14, 0, 14, 16, 9, 16),
-            Block.createCuboidShape(14.25, 8, 2, 15.75, 10, 14)
-    ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        switch (state.get(FACING)) {
-            case NORTH:
-                return SHAPE_N;
-            case SOUTH:
-                return SHAPE_S;
-            case WEST:
-                return SHAPE_W;
-            case EAST:
-                return SHAPE_E;
-            default:
-                return SHAPE_N;
-        }
+        return SHAPE;
     }
     @Nullable
     @Override
