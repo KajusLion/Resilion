@@ -1,6 +1,8 @@
 package me.kajuslion.resilion.block;
 
 import me.kajuslion.resilion.Resilion;
+import me.kajuslion.resilion.block.custom.OakChairBlock;
+import me.kajuslion.resilion.block.custom.OakTableBlock;
 import me.kajuslion.resilion.item.ModItemGroup;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -9,14 +11,15 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class ModBlocks {
     public static final Block OAK_TABLE = registerBlock("oak_table",
-            new Block(FabricBlockSettings.of(Material.WOOD).strength(4f).requiresTool()), ModItemGroup.RESILION);
+            new OakTableBlock(FabricBlockSettings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).nonOpaque().strength(4f).requiresTool()), ModItemGroup.RESILION);
     public static final Block OAK_CHAIR = registerBlock("oak_chair",
-            new Block(FabricBlockSettings.of(Material.WOOD).strength(4f).requiresTool()), ModItemGroup.RESILION);
+            new OakChairBlock(FabricBlockSettings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).nonOpaque().strength(4f).requiresTool()), ModItemGroup.RESILION);
 
 
 

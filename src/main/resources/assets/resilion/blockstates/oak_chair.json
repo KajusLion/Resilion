@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "resilion:block/oak_chair" },
+    "facing=east": { "model": "resilion:block/oak_chair", "y": 90 },
+    "facing=south": { "model": "resilion:block/oak_chair", "y": 180 },
+    "facing=west": { "model": "resilion:block/oak_chair", "y": 270 }
+  }
+}

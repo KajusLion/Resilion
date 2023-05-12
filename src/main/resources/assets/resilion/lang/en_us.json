@@ -1,5 +1,10 @@
 {
   "item.resilion.kajus_totem": "Kajus Child",
   "item.resilion.kajus_chest": "Kajus Chest",
+
+  "block.resilion.oak_chair": "Oak Chair",
+  "block.resilion.oak_table": "Oak Table",
+
   "itemGroup.resilion.resilion": "Resilion"
+
 }
