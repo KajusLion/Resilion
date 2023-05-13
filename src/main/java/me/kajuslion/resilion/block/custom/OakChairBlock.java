@@ -1,22 +1,25 @@
 package me.kajuslion.resilion.block.custom;
 
 import me.kajuslion.resilion.Resilion;
+import me.kajuslion.resilion.entity.InvisEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.ShapeContext;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BrewingStandBlockEntity;
+import net.minecraft.entity.mob.PiglinBrain;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.tag.BlockTags;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemPlacementContext;
@@ -24,6 +27,7 @@ import net.minecraft.state.StateManager;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 public class OakChairBlock extends Block {
@@ -35,22 +39,62 @@ public class OakChairBlock extends Block {
     }
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        Resilion.LOGGER.info("1");
+        if(!world.isClient()){
+            List<InvisEntity> seats = world.getEntitiesByClass(InvisEntity.class, new Box(pos.getX(), pos.getY(), pos.getZ(),
+                    pos.getX() + 1.0, pos.getY() + 1.0, pos.getZ() + 1.0), i -> true);
+            //This checks if chair is occupied.
+            if(seats.isEmpty())
+            {
+                //Create an entity
+                InvisEntity invis = Resilion.INVIS.create(world);
+                //Set its position
+                invis.setProperPosition(player, pos, 0.5, state.get(FACING));
+                //Spawn the entity on the world.
+                world.spawnEntity(invis);
+                //Make the player sit
+                invis.sitPlayer(player, state.get(FACING));
+
+            }
+
+
+
+        }
+
         return ActionResult.SUCCESS;
 
 
     }
+    /*
+    @Override
+    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+        super.onBreak(world, pos, state, player);
+        //mycode
+        List<InvisEntity> seats = world.getEntitiesByClass(InvisEntity.class, new Box(pos.getX(), pos.getY(), pos.getZ(),
+            pos.getX() + 1.0, pos.getY() + 1.0, pos.getZ() + 1.0), i -> true);
+        if(seats.isEmpty())
+        {
+            InvisEntity invis;
+            invis.unsitPlayer(player);
+            Resilion.LOGGER.info("EMPTY " + seats);
+        }
+
+
+        Resilion.LOGGER.info("Broken a block, preferably a chair");
+    }
+     */
+
+
     private static final VoxelShape SHAPE = Stream.of(
-            Block.createCuboidShape(2, 6, 0.25, 14, 8, 1.75),
-            Block.createCuboidShape(0.25, 6, 2, 1.75, 8, 14),
-            Block.createCuboidShape(2, 6, 14.25, 14, 8, 15.75),
-            Block.createCuboidShape(14.25, 6, 2, 15.75, 8, 14),
-            Block.createCuboidShape(14, 0, 14, 16, 7, 16),
-            Block.createCuboidShape(14, 0, 0, 16, 7, 2),
-            Block.createCuboidShape(0, 0, 0, 2, 7, 2),
-            Block.createCuboidShape(0, 0, 14, 2, 7, 16),
-            Block.createCuboidShape(-0.25, 7, -0.25, 16.25, 9, 16.25),
-            Block.createCuboidShape(1, 9, 1, 15, 9.5, 15)
+            Block.createCuboidShape(-0.25, 9, -0.25, 16.25, 11, 16.25),
+            Block.createCuboidShape(1, 11, 1, 15, 11.5, 15),
+            Block.createCuboidShape(14, 0, 14, 16, 9, 16),
+            Block.createCuboidShape(14.25, 8, 2, 15.75, 10, 14),
+            Block.createCuboidShape(14, 0, 0, 16, 9, 2),
+            Block.createCuboidShape(2, 8, 0.25, 14, 10, 1.75),
+            Block.createCuboidShape(0, 0, 0, 2, 9, 2),
+            Block.createCuboidShape(0.25, 8, 2, 1.75, 10, 14),
+            Block.createCuboidShape(0, 0, 14, 2, 9, 16),
+            Block.createCuboidShape(2, 8, 14.25, 14, 10, 15.75)
     ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
 
 

@@ -1,16 +1,28 @@
 package me.kajuslion.resilion.entity;
 
+import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.entity.EntityRenderer;
+import net.minecraft.client.render.entity.EntityRendererFactory;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 
-public class InvisEntityRenderer extends MobEntityRenderer<InvisEntity, InvisEntityModel>  {
-    public CubeEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, new InvisEntityEntityModel(context.getPart(EntityTestingClient.MODEL_CUBE_LAYER)), 0.5f);
+public class InvisEntityRenderer extends EntityRenderer<InvisEntity> {
+    public InvisEntityRenderer(EntityRendererFactory.Context context) {
+        super(context);
     }
 
+    //No texture; We dont need one.
     @Override
-    public Identifier getTexture(CubeEntity entity) {
-        return new Identifier("entitytesting", "textures/entity/cube/cube.png");
+    public Identifier getTexture(InvisEntity entity) {
+        return null;
+    }
+
+    //Override this for rendering. But we are not rendering anything so leave it empty
+    @Override
+    public void render(InvisEntity entity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
+
     }
 }
