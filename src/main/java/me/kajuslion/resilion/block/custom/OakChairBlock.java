@@ -2,13 +2,13 @@ package me.kajuslion.resilion.block.custom;
 
 import me.kajuslion.resilion.Resilion;
 import me.kajuslion.resilion.entity.InvisEntity;
+import me.kajuslion.resilion.entity.InvisEntity;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.ShapeContext;
-import net.minecraft.entity.mob.PiglinBrain;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.tag.BlockTags;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.function.BooleanBiFunction;
@@ -19,7 +19,6 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemPlacementContext;
@@ -27,8 +26,11 @@ import net.minecraft.state.StateManager;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 
+
+
 import java.util.List;
 import java.util.stream.Stream;
+
 
 public class OakChairBlock extends Block {
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
@@ -49,6 +51,9 @@ public class OakChairBlock extends Block {
                 InvisEntity invis = Resilion.INVIS.create(world);
                 //Set its position
                 invis.setProperPosition(player, pos, 0.5, state.get(FACING));
+
+                invis.setBlockPos(pos);
+
                 //Spawn the entity on the world.
                 world.spawnEntity(invis);
                 //Make the player sit
@@ -64,7 +69,7 @@ public class OakChairBlock extends Block {
 
 
     }
-    /*
+
     @Override
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         super.onBreak(world, pos, state, player);
@@ -73,15 +78,18 @@ public class OakChairBlock extends Block {
             pos.getX() + 1.0, pos.getY() + 1.0, pos.getZ() + 1.0), i -> true);
         if(seats.isEmpty())
         {
-            InvisEntity invis;
-            invis.unsitPlayer(player);
-            Resilion.LOGGER.info("EMPTY " + seats);
+
+
+
+            Resilion.LOGGER.info("blockpos " + pos);
+            Resilion.LOGGER.info("entitypos " + gotblockpos);
+
         }
 
 
         Resilion.LOGGER.info("Broken a block, preferably a chair");
     }
-     */
+
 
 
     private static final VoxelShape SHAPE = Stream.of(

@@ -3,6 +3,7 @@ package me.kajuslion.resilion.entity;
 import me.kajuslion.resilion.Resilion;
 import static me.kajuslion.resilion.utility.ModUtil.getYawFromDirection;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Dismounting;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -12,7 +13,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
+import net.minecraft.util.TypeFilter;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -21,6 +24,7 @@ import net.minecraft.world.World;
 public class InvisEntity extends Entity {
 
     public boolean isRidden = false;
+
     public InvisEntity(EntityType<? extends Entity> entityType, World world) {
         super(entityType, world);
         this.noClip = true;
@@ -47,11 +51,16 @@ public class InvisEntity extends Entity {
         this.isRidden = nbt.getBoolean("isSomeoneSitting");
     }
 
+
     //Saves the entity on world close while the player is sitting to avoid de-sitting when player comes back.
     @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
         nbt.putBoolean("isSomeoneSitting", this.isRidden);
+        nbt.putIntArray("blockpos", new int[]{blockpos.getX(),blockpos.getY(),blockpos.getZ()});
     }
+
+
+
     //Making sure it only takes damage when removed or void related.
     @Override
     public boolean isInvulnerableTo(DamageSource damageSource) {
@@ -74,6 +83,24 @@ public class InvisEntity extends Entity {
         }
     }
 
+    BlockPos blockpos;
+    public void setBlockPos(BlockPos pos){
+        blockpos = pos;
+    }
+
+    public static InvisEntity getInvisEntity(World world, BlockPos bp){
+        if (!world.isClient) {
+            InvisEntity invisentity;
+
+
+
+            invisentity = ;
+
+            return invisentity;
+        }
+        return null;
+    }
+
     @Override
     public Vec3d updatePassengerForDismount(LivingEntity passenger) {
         Direction original = this.getHorizontalFacing();
@@ -92,7 +119,8 @@ public class InvisEntity extends Entity {
     public void unsitPlayer(PlayerEntity player){
         if (!this.world.isClient) {
             this.isRidden = false;
-            player.stopRiding();
+            this.kill();
+            //player.stopRiding();
         }
     }
 
