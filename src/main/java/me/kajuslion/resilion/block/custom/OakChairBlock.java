@@ -75,7 +75,7 @@ public class OakChairBlock extends Block {
         super.onBreak(world, pos, state, player);
         //mycode
         List<InvisEntity> seats = world.getEntitiesByClass(InvisEntity.class, new Box(pos.getX(), pos.getY(), pos.getZ(),
-            pos.getX() + 1.0, pos.getY() + 1.0, pos.getZ() + 1.0), i -> true);
+                pos.getX() + 1.0, pos.getY() + 1.0, pos.getZ() + 1.0), i -> true);
         if(seats.isEmpty())
         {
 
