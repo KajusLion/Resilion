@@ -76,18 +76,18 @@ public class OakChairBlock extends Block {
         //mycode
         List<InvisEntity> seats = world.getEntitiesByClass(InvisEntity.class, new Box(pos.getX(), pos.getY(), pos.getZ(),
                 pos.getX() + 1.0, pos.getY() + 1.0, pos.getZ() + 1.0), i -> true);
-        if(seats.isEmpty())
+        if(!seats.isEmpty())
         {
+            for (InvisEntity seat : seats) {
 
-
-
-            Resilion.LOGGER.info("blockpos " + pos);
-            Resilion.LOGGER.info("entitypos " + gotblockpos);
+                if (seat.getBlockPos().equals(pos)) {
+                    seat.kill();
+                    seat.isRidden = false;
+                }
+            }
 
         }
 
-
-        Resilion.LOGGER.info("Broken a block, preferably a chair");
     }
 
 

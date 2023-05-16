@@ -88,19 +88,6 @@ public class InvisEntity extends Entity {
         blockpos = pos;
     }
 
-    public static InvisEntity getInvisEntity(World world, BlockPos bp){
-        if (!world.isClient) {
-            InvisEntity invisentity;
-
-
-
-            invisentity = ;
-
-            return invisentity;
-        }
-        return null;
-    }
-
     @Override
     public Vec3d updatePassengerForDismount(LivingEntity passenger) {
         Direction original = this.getHorizontalFacing();
@@ -116,13 +103,6 @@ public class InvisEntity extends Entity {
         return passenger.getPos().add(0,0.5,0);
     }
 
-    public void unsitPlayer(PlayerEntity player){
-        if (!this.world.isClient) {
-            this.isRidden = false;
-            this.kill();
-            //player.stopRiding();
-        }
-    }
 
     //Make the player ride the chair
     public void sitPlayer(PlayerEntity player, Direction direction) {
