@@ -2,10 +2,10 @@ package me.kajuslion.resilion.block.custom;
 
 import me.kajuslion.resilion.Resilion;
 import me.kajuslion.resilion.entity.InvisEntity;
-import me.kajuslion.resilion.entity.InvisEntity;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.ShapeContext;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
@@ -50,6 +50,7 @@ public class OakChairBlock extends Block {
                 //Create an entity
                 InvisEntity invis = Resilion.INVIS.create(world);
                 //Set its position
+                assert invis != null;
                 invis.setProperPosition(player, pos, 0.5, state.get(FACING));
 
                 invis.setBlockPos(pos);
@@ -81,8 +82,15 @@ public class OakChairBlock extends Block {
             for (InvisEntity seat : seats) {
 
                 if (seat.getBlockPos().equals(pos)) {
-                    seat.kill();
+                    seat.removeAllPassengers();
+                    seat.removeAllPassengers();
+                    List<Entity> passengers = seat.getPassengerList();
+                    for (Entity players : passengers){
+                        players.stopRiding();
+                    }
+                    Resilion.LOGGER.info("Stoppd riding");
                     seat.isRidden = false;
+                    seat.kill();
                 }
             }
 

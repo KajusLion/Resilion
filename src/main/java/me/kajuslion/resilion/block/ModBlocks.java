@@ -17,9 +17,9 @@ import net.minecraft.util.registry.Registry;
 
 public class ModBlocks {
     public static final Block OAK_TABLE = registerBlock("oak_table",
-            new OakTableBlock(FabricBlockSettings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).nonOpaque().strength(4f).requiresTool()), ModItemGroup.RESILION);
+            new OakTableBlock(FabricBlockSettings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).nonOpaque().strength(0.3f).requiresTool()), ModItemGroup.RESILION);
     public static final Block OAK_CHAIR = registerBlock("oak_chair",
-            new OakChairBlock(FabricBlockSettings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).nonOpaque().strength(4f).requiresTool()), ModItemGroup.RESILION);
+            new OakChairBlock(FabricBlockSettings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).nonOpaque().strength(0.3f).requiresTool()), ModItemGroup.RESILION);
 
 
 
